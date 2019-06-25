@@ -1,28 +1,19 @@
-# Adonis API application
+# Segurança e auditoria de sistemas
 
-This is the boilerplate for creating an API server in AdonisJs, it comes pre-configured with.
+A verificação do certificado está no diretório <code>/app/Controllers/Http/DomainController.js</code> dentro do método <code>store<code>.
+  
+As rotas devem ser utilizadas para salvar as informações relacionadas ao domínio a aplicação local após o start do server acontece no endereço <code>http://127.0.0.1:3333</code>.
 
-1. Bodyparser
-2. Authentication
-3. CORS
-4. Lucid ORM
-5. Migrations and seeds
+## [POST] http://127.0.0.1:3333/domain
+Nessa rota é necessário passar no corpo da requisição um objeto json com as propriedades uri que é o dominio que se  deseja verificar o certificado e o email da pessoa que possa receber as informações por e-mail.
+<code>
+{ 
+"uri": "g1.globo.com",
+"email" : "anilton.veigaa@gmail.com"
+}
+ </code>
+ 
+ ## [GET] http://127.0.0.1:3333/domain
+Essa rota retorna todos os dominios com certificados pesquisados e salvos.
 
-## Setup
-
-Use the adonis command to install the blueprint
-
-```bash
-adonis new yardstick --api-only
-```
-
-or manually clone the repo and then run `npm install`.
-
-
-### Migrations
-
-Run the following command to run startup migrations.
-
-```js
-adonis migration:run
-```
+ps: O banco utilizado foi o mysql e precisa configurar as variaveis de ambiente no arquivo <code>.env<c/code>, é necessario instalar o driver com <code>yarn add mysql<code>, as tabelas do banco serão inseridas pela migration domain ao rodar o comando <code>adonis migration:run</code>
